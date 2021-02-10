@@ -21,6 +21,15 @@ public final class Logic {
     }
 
     private boolean free(Cell[] steps) throws OccupiedCellException {
+        for(Cell wayStep : steps){
+            try {
+                if (findBy(wayStep) > -1) {
+                    throw new OccupiedCellException("The cell is not empty!");
+                }
+            }catch (FigureNotFoundException e){
+                e.getStackTrace();
+            }
+        }
         return true;
     }
 
@@ -36,6 +45,6 @@ public final class Logic {
                 return index;
             }
         }
-        throw new FigureNotFoundException();
+        throw new FigureNotFoundException("Figure did not find.");
     }
 }
